@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0; /* Set radius to 0 for Windows 98 style */
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Remove border radius from all elements */
+  button,
+  input,
+  select,
+  textarea,
+  div,
+  [role="dialog"] {
+    border-radius: 0 !important;
+  }
+
+  /* Remove rounded-lg from card elements */
+  [data-v0-t="card"] {
+    @apply rounded-none !important;
+  }
+
+  [data-v0-t="card"] > * {
+    @apply rounded-none !important;
+  }
+
+  /* Remove any rounded corners from all elements */
+  .rounded-lg,
+  .rounded-md,
+  .rounded-sm,
+  .rounded-xl,
+  .rounded-2xl,
+  .rounded-3xl,
+  .rounded-full {
+    @apply rounded-none !important;
+  }
+}
+
+/* Windows 98 Styles */
+@font-face {
+  font-family: "MS Sans Serif";
+  src: url("https://unpkg.com/98.css@0.1.17/dist/ms_sans_serif.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MS Sans Serif";
+  src: url("https://unpkg.com/98.css@0.1.17/dist/ms_sans_serif_bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@layer components {
+  .win98-window {
+    @apply rounded-none;
+  }
+
+  .win98-button {
+    @apply rounded-none focus:outline-none focus:ring-0;
+  }
+
+  .win98-button:active {
+    @apply border-[#808080] border-r-[#dfdfdf] border-b-[#dfdfdf];
+  }
+
+  .win98-dropdown {
+    @apply rounded-none focus:outline-none focus:ring-0;
+  }
+
+  .win98-checkbox:checked {
+    @apply bg-[#000080] border-[#000080];
+  }
+
+  /* Windows 98 style toast */
+  [role="region"][aria-label="Notifications"] {
+    @apply fixed z-50 flex flex-col gap-2 p-4 bottom-0 right-0 max-w-[420px] w-full;
+  }
+
+  [role="region"][aria-label="Notifications"] > div {
+    @apply bg-[#c0c0c0] border-2 border-[#dfdfdf] border-r-[#808080] border-b-[#808080] p-0 rounded-none shadow-none;
+  }
+
+  /* Target the toast container specifically */
+  [role="region"][aria-label="Notifications"] > div,
+  [role="region"][aria-label="Notifications"] > div > div,
+  [role="region"][aria-label="Notifications"] > div > div > div {
+    @apply rounded-none !important;
+  }
+
+  [role="region"][aria-label="Notifications"] > div > div {
+    @apply p-2;
+  }
+
+  [role="region"][aria-label="Notifications"] h2 {
+    @apply text-sm font-bold font-['MS_Sans_Serif',sans-serif] mb-1;
+  }
+
+  [role="region"][aria-label="Notifications"] p {
+    @apply text-xs font-['MS_Sans_Serif',sans-serif];
+  }
+
+  /* Windows 98 style toast title bar */
+  [role="region"][aria-label="Notifications"] > div::before {
+    content: "";
+    @apply block bg-[#000080] text-white p-1 mb-1;
+  }
+
+  /* Windows 98 style toast close button */
+  [role="region"][aria-label="Notifications"] button {
+    @apply absolute top-1 right-1 w-4 h-4 flex items-center justify-center bg-[#c0c0c0] border border-white border-r-[#5a5a5a] border-b-[#5a5a5a] text-[10px] rounded-none;
+  }
+
+  .animate-progress {
+    animation: progress 2s linear infinite;
+    background-image: linear-gradient(
+      -45deg,
+      #000080 25%,
+      #0000aa 25%,
+      #0000aa 50%,
+      #000080 50%,
+      #000080 75%,
+      #0000aa 75%,
+      #0000aa
+    );
+    background-size: 20px 20px;
+  }
+
+  @keyframes progress {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 40px 0;
+    }
+  }
+}
+
